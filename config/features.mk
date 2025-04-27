@@ -45,8 +45,7 @@ endif
 
 # GAPPS
 ifeq ($(TARGET_BUILD_PACKAGE),3)
-  BUILD_GMS_OVERLAYS_AND_PROPS := true
-  $(call inherit-product, vendor/gms/products/gms.mk)
+ $(call inherit-product, vendor/gapps/gapps.mk)
 else
   ifeq ($(TARGET_BUILD_PACKAGE),2)
     $(call inherit-product, vendor/microg/product.mk)
