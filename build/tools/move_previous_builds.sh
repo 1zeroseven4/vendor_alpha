@@ -15,10 +15,15 @@
 # limitations under the License.
 #
 
+[ -z $1 ] && exit 0
+
 OUT_FOLDER=$1
 BACKUP_FOLDER=$OUT_FOLDER/previous_builds
 
-[ ! -d $BACKUP_FOLDER ] && mkdir $BACKUP_FOLDER
+[ ! -d $BACKUP_FOLDER ] && mkdir $BACKUP_FOLDER 2>/dev/null
 zips=$(ls $OUT_FOLDER/AlphaDroid*zip 2>/dev/null) \
   && mv -f $zips $BACKUP_FOLDER/ 2>/dev/null \
   && printf "moving previous zips from %s to %s..." $OUT_FOLDER $BACKUP_FOLDER
+
+DEVICE=$(echo $TARGET_PRODUCT | sed -e 's/^alpha_//g')
+[ -n $DEVICE ] && mv -f $OUT_FOLDER/$DEVICE.json $BACKUP_FOLDER/ 2>/dev/null
