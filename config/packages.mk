@@ -13,7 +13,6 @@ PRODUCT_PACKAGES += \
     Launcher3QuickStep \
     LineageParts \
     LineageSettingsProvider \
-    LineageSetupWizard \
     LMOFreeform \
     LMOFreeformSidebar \
     OmniJaws \
@@ -25,6 +24,8 @@ PRODUCT_PACKAGES += \
     ThemePicker \
     ThemesStub \
     Updater
+
+#    LineageSetupWizard \
 
 ifneq ($(PRODUCT_NO_CAMERA),true)
   PRODUCT_PACKAGES += \
