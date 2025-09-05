@@ -1,7 +1,20 @@
-# Inherit mobile full common Lineage stuff
-$(call inherit-product, vendor/lineage/config/common_mobile_full.mk)
+# Inherit mobile full common stuff
+ifeq ($(TABLET_WIFI_ONLY),true)
+  $(call inherit-product, vendor/alpha/config/common.mk)
 
-# Inherit tablet common Lineage stuff
-$(call inherit-product, vendor/lineage/config/tablet.mk)
+  PRODUCT_PACKAGES += \
+    EmergencyInfo
 
-$(call inherit-product, vendor/lineage/config/telephony.mk)
+  PRODUCT_PACKAGE_OVERLAYS += vendor/alpha/overlay/wifionly
+else
+  $(call inherit-product, vendor/alpha/config/common_full_phone.mk)
+endif
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/window_extensions.mk)
+
+# Settings
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.settings.large_screen_opt.enabled=true
+
+# Tablet-specific overlay
+PRODUCT_PACKAGE_OVERLAYS += vendor/alpha/overlay/tablet

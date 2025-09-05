@@ -1,8 +1,23 @@
-# Inherit mobile full common Lineage stuff
-$(call inherit-product, vendor/lineage/config/common_mobile_full.mk)
+# Sensitive Phone Numbers list
+PRODUCT_PACKAGES += \
+    sensitive_pn.xml
 
-# Enable support of one-handed mode
+# World APN list
+PRODUCT_PACKAGES += \
+    apns-conf.xml
+
+# Telephony packages
+PRODUCT_PACKAGES += \
+    messaging \
+    Stk
+
+# Tethering - allow without requiring a provisioning app
+# (for devices that check this)
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    net.tethering.noprovisioning=true
+
+# Disable mobile data by default
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.support_one_handed_mode?=true
+    ro.com.android.mobiledata=false
 
-$(call inherit-product, vendor/lineage/config/telephony.mk)
+$(call inherit-product, vendor/alpha/config/common.mk)

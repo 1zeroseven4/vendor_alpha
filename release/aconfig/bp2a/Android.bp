@@ -14,7 +14,7 @@
 // limitations under the License.
 
 aconfig_value_set {
-    name: "aconfig_value_set-lineage-bp2a",
+    name: "aconfig_value_set-alpha-bp2a",
     values: [
         "aconfig-values-bp2a-android.app-all",
         "aconfig-values-bp2a-android.media.codec-all",
