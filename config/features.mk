@@ -61,10 +61,13 @@ ifeq ($(TARGET_BUILD_PACKAGE),3)
     ro.com.google.ime.bs_theme=true \
     ro.com.google.ime.system_lm_dir=/product/usr/share/ime/google/d3_lms
 
-  # Quick Switch prop
+  # Conditionally include pixel launcher and theme picker squad
   ifeq ($(TARGET_INCLUDE_PIXEL_LAUNCHER),true)
     PRODUCT_PRODUCT_PROPERTIES += \
       persist.sys.nexuslauncher=1
+
+    $(call inherit-product, vendor/pixel/launcher/products/launcher.mk)
+    $(call inherit-product, vendor/pixel/themepicker/products/themepicker.mk)
   else
     PRODUCT_PRODUCT_PROPERTIES += \
       persist.sys.nexuslauncher=0
@@ -87,7 +90,7 @@ ifeq ($(TARGET_BUILD_PACKAGE),3)
   PRODUCT_PRODUCT_PROPERTIES += \
     setupwizard.theme=glif_v4_light
 
-  $(call inherit-product, vendor/gms/products/gms.mk)
+  $(call inherit-product, vendor/pixel/gms/products/gms.mk)
 else
   ifeq ($(TARGET_BUILD_PACKAGE),2)
     $(call inherit-product, vendor/microg/product.mk)
