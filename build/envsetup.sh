@@ -40,27 +40,19 @@ function brunch()
     return $?
 }
 
-
 function breakfast()
 {
     target=$1
     local variant=$2
-    source ${ANDROID_BUILD_TOP}/vendor/alpha/vars/aosp_target_release
 
     if [ $# -eq 0 ]; then
         # No arguments, so let's have the full menu
         lunch
     else
-        if [[ "$target" =~ -(user|userdebug|eng)$ ]]; then
-            # A buildtype was specified, assume a full device name
-            lunch $target
+        if [[ -n $variant ]]; then
+            lunch $target $variant
         else
-            # This is probably just the Lineage model name
-            if [ -z "$variant" ]; then
-                variant="user"
-            fi
-
-            lunch alpha_$target-$aosp_target_release-$variant
+            lunch $target
         fi
     fi
     return $?
