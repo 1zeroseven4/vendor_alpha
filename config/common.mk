@@ -116,48 +116,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
 
 # GAPPS
 ifeq ($(TARGET_BUILD_PACKAGE),3)
-    # Default notification/alarm sounds
-    PRODUCT_PRODUCT_PROPERTIES += \
-        ro.config.notification_sound=Popcorn.ogg \
-        ro.config.alarm_alert=Bright_morning.ogg
-
-    # Default ringtone
-    PRODUCT_PRODUCT_PROPERTIES += \
-        ro.config.ringtone=The_big_adventure.ogg
-
-    # Gboard Props
-    PRODUCT_PRODUCT_PROPERTIES += \
-        ro.com.google.ime.bs_theme=true \
-        ro.com.google.ime.system_lm_dir=/product/usr/share/ime/google/d3_lms
-
-    # Conditionally include pixel launcher and theme picker squad
-    ifeq ($(TARGET_INCLUDE_PIXEL_LAUNCHER),true)
-        PRODUCT_PRODUCT_PROPERTIES += \
-            persist.sys.nexuslauncher=1
-
-        $(call inherit-product, vendor/pixel/launcher/products/launcher.mk)
-        $(call inherit-product, vendor/pixel/themepicker/products/themepicker.mk)
-        $(call inherit-product, vendor/pixel/sounds/products/sounds.mk)
-    else
-        PRODUCT_PRODUCT_PROPERTIES += \
-            persist.sys.nexuslauncher=0
-    endif
-
-    # SetupWizard Props
-    PRODUCT_PRODUCT_PROPERTIES += \
-        ro.setupwizard.esim_cid_ignore=00000001 \
-        setupwizard.feature.baseline_setupwizard_enabled=true \
-        setupwizard.feature.day_night_mode_enabled=true \
-        setupwizard.feature.enable_gil= \
-        setupwizard.feature.enable_quick_start_flow=true \
-        setupwizard.feature.enable_restore_anytime=true \
-        setupwizard.feature.enable_wifi_tracker=true \
-        setupwizard.feature.lifecycle_refactoring=true \
-        setupwizard.feature.notification_refactoring=true \
-        setupwizard.feature.portal_notification=true \
-        setupwizard.feature.provisioning_profile_mode=true
-
-    $(call inherit-product, vendor/pixel/gms/products/gms.mk)
+    $(call inherit-product, vendor/gapps/arm64/arm64-vendor.mk)
 else
     ifeq ($(TARGET_BUILD_PACKAGE),2)
         $(call inherit-product, vendor/microg/product.mk)
